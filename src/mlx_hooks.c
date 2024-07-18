@@ -6,14 +6,17 @@
 /*   By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 01:53:27 by adiban-i          #+#    #+#             */
-/*   Updated: 2024/07/02 17:00:38 by adiban-i         ###   ########.fr       */
+/*   Updated: 2024/07/18 15:26:54 by adiban-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	close_window(t_game_data *gd)
+void	close_window(void *param)
 {
+	t_game_data *gd;
+
+	gd = (t_game_data *) param;
 	if (!gd->game_ended)
 	{
 		ft_putstr("\033[1;31m");
@@ -26,60 +29,55 @@ int	close_window(t_game_data *gd)
 		ft_putstr("\nThanks for playing ^^!\n");
 		ft_putstr("\033[0m\n");
 	}
-	/* if (gd->window)
-	{
-		mlx_destroy_window(gd->mlx, gd->window);
-		gd->window = NULL;
-	}
-	if (gd->mlx)
-	{
-		mlx_destroy_display(gd->mlx);
-		gd->mlx = NULL;
-	} */
 	//free_game_data(gd);
+	mlx_close_window(gd->mlx);
 	exit(EXIT_SUCCESS);
-	return (0);
 }
 
-static void	reset_gd_moves(t_game_data *gd)
+void	move_hook(mlx_key_data_t keydata, void *data)
 {
-	gd->move_up = 0;
-	gd->move_down = 0;
-	gd->move_left = 0;
-	gd->move_right = 0;
-}
+	t_game_data	*gd;
 
-int	key_press(int keycode, t_game_data *gd)
-{
-	if (keycode == ESC)
+	gd = (t_game_data *) data;
+	if (mlx_is_key_down(gd->mlx, MLX_KEY_ESCAPE))
 		close_window(gd);
-	if (keycode == UP)
-	{
-		reset_gd_moves(gd);
-		gd->move_up = 1;
-	}
-	else if (keycode == DOWN)
-	{
-		reset_gd_moves(gd);
-		gd->move_down = 1;
-	}
-	else if (keycode == LEFT)
-	{
-		reset_gd_moves(gd);
-		gd->move_left = 1;
-	}
-	else if (keycode == RIGHT)
-	{
-		reset_gd_moves(gd);
-		gd->move_right = 1;
-	}
-	printf("keycode: %d\n", keycode);
-	return (0);
+	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
+		move_player(0, 1, gd);
+	else if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
+		move_player(0, -1, gd);
+	else if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
+		move_player(-1, 0, gd);
+	else if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
+		move_player(1, 0, gd);
+	put_map(gd);
 }
 
-int	key_release(int keycode, t_game_data *gd)
+static void	update_animations(t_anim_data *anim_data)
 {
-	if (keycode == LEFT || keycode == RIGHT || keycode == UP || keycode == DOWN)
-		reset_gd_moves(gd);
-	return (0);
+	anim_data->frame_counter++;
+	if (anim_data->frame_counter >= anim_data->frame_delay)
+	{
+		anim_data->frame_counter = 0;
+		anim_data->current_frame = (anim_data->current_frame + 1)
+			% anim_data->frame_count;
+	}
+}
+
+void	render_next_frame_loop(void	*param)
+{
+	t_game_data	*gd;
+	gd = (t_game_data *)param;
+	gd->update_counter++;
+	if (gd->update_counter >= 3 && !gd->game_ended)
+	{
+		gd->update_counter = 0;
+		update_animations(gd->exit_anim_data);
+		put_animations(gd);
+		/* if (gd->mlx)
+			put_map(gd); */
+		//move_enemies(gd);
+	}
+	else if (gd->game_ended)
+		draw_end_img(gd);
+	return ;
 }

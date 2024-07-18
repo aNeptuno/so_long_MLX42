@@ -6,7 +6,7 @@
 /*   By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 13:24:42 by adiban-i          #+#    #+#             */
-/*   Updated: 2024/07/03 18:37:08 by adiban-i         ###   ########.fr       */
+/*   Updated: 2024/07/18 14:56:59 by adiban-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,8 @@
 # define RIGHT 100
 # define LEFT 97
 # define PIXELS 32
-# define HEADER_HEIGHT 50
-# define UPDATE_FREQ 3500
-# define ENEMY_FREQ 10000
+# define HEADER_HEIGHT 80
+# define UPDATE_FREQ 1000
 
 typedef struct s_point
 {
@@ -57,15 +56,13 @@ typedef struct s_anim_data
 	int	position_y;
 }	t_anim_data;
 
+
 /// @brief Structure for game sprites (mlx_xpm_file_to_image)
 typedef struct s_sprites
 {
 	void	*bg;
-	void	*bg_resized;
 	void	*lost;
-	void	*lost_resized;
 	void	*win;
-	void	*win_resized;
 	void	*player_up;
 	void	*player_left;
 	void	*player_right;
@@ -74,6 +71,7 @@ typedef struct s_sprites
 	void	*collectable;
 	void	*exit;
 	void	*header;
+	void	*header_bg;
 	void	*exit_anim_frames[6];
 	void	*enemy;
 }		t_sprites;
@@ -104,10 +102,6 @@ typedef struct s_enemy
  * @player: Pointer to the player position structure.
  * @new_move: New move direction: U (up), D(down), L(left), R(right).
  * @player_items: Number of items collected by the player.
- * @move_up: Flag indicating if the up move key is pressed.
- * @move_down: Flag indicating if the down move key is pressed.
- * @move_left: Flag indicating if the left move key is pressed.
- * @move_right: Flag indicating if the right move key is pressed.
  * @update_counter: Counter for updating the game state.
  * @game_ended: Flag indicating if the game has ended.
  * @exit_anim_data: Contains necessary data to render exit animation.
@@ -131,10 +125,6 @@ typedef struct s_game_data
 	t_point		*player;
 	char		new_move;
 	int			player_items;
-	int			move_up;
-	int			move_down;
-	int			move_left;
-	int			move_right;
 	int			update_counter;
 	int			game_ended;
 	t_anim_data	*exit_anim_data;
@@ -157,8 +147,8 @@ char	*ft_strjoin(char const *s1, char const *s2);
 
 // Game initialization and data cleaning
 void	get_map(t_game_data *game_data, char *file_content);
-void	resize_bg_image(t_game_data *gd, int original_width, int original_height);
-void	resize_end_img(t_game_data *gd, int original_width, int original_height, int win);
+void	*load_and_check_texture(char *path, char *check_desc);
+void	check_error_img_or_texture(void *img, char *info, int texture);
 void	init_sprites(t_game_data *game_data);
 void	init_enemies(t_game_data *gd);
 void	error_and_free(t_game_data *game_data, char *msg);
@@ -174,16 +164,16 @@ void	validate_map(t_game_data *game_data);
 void	map_error(t_game_data *gd, char *msg);
 
 // Mlx hooks
-int		close_window(t_game_data *gd);
-int		key_press(int keycode, t_game_data *gd);
-int		key_release(int keycode, t_game_data *gd);
+void	move_hook(mlx_key_data_t keydata, void *data);
+void	close_window(void *gd);
 
 // Sprites rendering and character movement
 void	put_map(t_game_data *gd);
 void	put_enemy(t_game_data *gd, int i, int j);
 void	put_animations(t_game_data *gd);
-void	render_next_frame_loop(void	*gd);
+void	render_next_frame_loop(void	*param);
 void	draw_end_img(t_game_data *gd);
+void	move_player(int coord_x, int coord_y, t_game_data *gd);
 
 // Enemies
 void	move_enemies(t_game_data *gd);

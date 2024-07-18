@@ -6,7 +6,7 @@
 #    By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/13 11:52:59 by adiban-i          #+#    #+#              #
-#    Updated: 2024/07/03 13:46:45 by adiban-i         ###   ########.fr        #
+#    Updated: 2024/07/18 12:21:17 by adiban-i         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,6 @@ SRC_FILES = $(LIBFT_DIR)/ft_split.c \
 			$(SRC_DIR)/map_validation_utils.c \
 			$(SRC_DIR)/animations.c \
 			$(SRC_DIR)/put_images.c \
-			$(SRC_DIR)/resize_img.c \
 			$(SRC_DIR)/utils.c \
 			$(SRC_DIR)/enemy.c \
 			$(SRC_DIR)/init_sprites.c
@@ -72,9 +71,10 @@ libmlx:
 
 %.o : %.c
 	@echo $(MAGENTA)Compiling [$<]...$(NC)
-	@$(CC) $(CFLAGS) $(HEADERS) -c -o $@ $<
+	@$(CC) $(HEADERS) -c -o $@ $<
 	@printf $(UP)$(CUT)
 
+# CC $(CFLAGS)  HEADERS
 
 $(NAME): $(OBJ_FILES)
 	@echo $(MAGENTA)Compiling [$(SRC_FILES)]...$(NC)

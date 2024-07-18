@@ -6,7 +6,7 @@
 /*   By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 19:32:07 by adiban-i          #+#    #+#             */
-/*   Updated: 2024/07/18 10:07:20 by adiban-i         ###   ########.fr       */
+/*   Updated: 2024/07/18 15:14:08 by adiban-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	init_mlx(t_game_data *gd)
 {
-	gd->mlx = mlx_init(gd->size_x, gd->size_y, "so_long", false);
+	gd->mlx = mlx_init(gd->size_x, gd->size_y + 32, "so_long", false);
 	if (gd->mlx == NULL)
 	{
 		perror("Error\nmlx init failed\n");
@@ -28,15 +28,12 @@ static void	init_game(t_game_data *gd)
 	gd->player_moves = 0;
 	gd->player_items = 0;
 	gd->map_items = 0;
-	gd->move_up = 0;
-	gd->move_down = 0;
-	gd->move_left = 0;
-	gd->move_right = 0;
 	gd->update_counter = 0;
 	gd->game_ended = 0;
 	gd->player = malloc(sizeof(t_point));
 	gd->first_init = 1;
 	gd->win = 0;
+	gd->exit_anim_data = malloc(sizeof(t_anim_data));
 	init_enemies(gd);
 	init_sprites(gd);
 	put_map(gd);
@@ -53,12 +50,11 @@ int	main(int ac, char **av)
 		{
 			init_mlx(&game_data);
 			init_game(&game_data);
-			/* mlx_hook(game_data.window, 17, 0, &close_window, &game_data);
-			mlx_hook(game_data.window, 2, 1L << 0, key_press, &game_data);
-			mlx_hook(game_data.window, 3, 1L << 1, key_release, &game_data); */
-			//mlx_loop_hook(game_data.mlx, render_next_frame_loop, &game_data);
+			
+			mlx_key_hook(game_data.mlx, move_hook, &game_data);
+			mlx_close_hook(game_data.mlx, close_window, &game_data);
+			mlx_loop_hook(game_data.mlx, render_next_frame_loop, &game_data);
 			mlx_loop(game_data.mlx);
-
 			mlx_terminate(game_data.mlx);
 			return (EXIT_SUCCESS);
 		}

@@ -6,7 +6,7 @@
 /*   By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 14:21:29 by adiban-i          #+#    #+#             */
-/*   Updated: 2024/07/03 18:04:17 by adiban-i         ###   ########.fr       */
+/*   Updated: 2024/07/18 13:28:12 by adiban-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static void	move_exit(t_game_data *gd)
 	}
 }
 
-static void	move_player(int coord_x, int coord_y, t_game_data *gd)
+void	move_player(int coord_x, int coord_y, t_game_data *gd)
 {
 	char	c;
 
@@ -102,44 +102,4 @@ static void	move_player(int coord_x, int coord_y, t_game_data *gd)
 		if (c == 'M')
 			touch_enemy(gd);
 	}
-}
-
-void	update_animations(t_anim_data *anim_data)
-{
-	anim_data->frame_counter++;
-	if (anim_data->frame_counter >= anim_data->frame_delay)
-	{
-		anim_data->frame_counter = 0;
-		anim_data->current_frame = (anim_data->current_frame + 1)
-			% anim_data->frame_count;
-	}
-}
-
-void	render_next_frame_loop(void	*param)
-{
-	t_game_data	*gd;
-	gd = (t_game_data *)param;
-	gd->update_counter++;
-	if (gd->update_counter >= UPDATE_FREQ && !gd->game_ended)
-	{
-		gd->update_counter = 0;
-		if (gd->move_up)
-			move_player(0, 1, gd);
-		else if (gd->move_down)
-			move_player(0, -1, gd);
-		else if (gd->move_left)
-			move_player(-1, 0, gd);
-		else if (gd->move_right)
-			move_player(1, 0, gd);
-		update_animations(gd->exit_anim_data);
-		if (gd->mlx && gd->window)
-		{
-			//mlx_clear_window(gd->mlx, gd->window);
-			put_map(gd);
-		}
-		move_enemies(gd);
-	}
-	else if (gd->game_ended)
-		draw_end_img(gd);
-	return ;
 }

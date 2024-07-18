@@ -6,7 +6,7 @@
 /*   By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 02:54:40 by adiban-i          #+#    #+#             */
-/*   Updated: 2024/07/03 18:34:43 by adiban-i         ###   ########.fr       */
+/*   Updated: 2024/07/18 14:55:25 by adiban-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,12 @@ static void	free_sprites(t_game_data *gd)
 	if (gd->sprites)
 	{
 		if (gd->sprites->bg)
-			mlx_destroy_image(gd->mlx, gd->sprites->bg);
-		if (gd->sprites->bg_resized)
-			mlx_destroy_image(gd->mlx, gd->sprites->bg_resized);
+			mlx_delete_image(gd->mlx, gd->sprites->bg);
 		i = 0;
 		while (i < gd->exit_anim_data->frame_count)
 		{
 			if (gd->sprites->exit_anim_frames[i])
-				mlx_destroy_image(gd->mlx,
+				mlx_delete_image(gd->mlx,
 					gd->sprites->exit_anim_frames[i]);
 			i++;
 		}
@@ -66,10 +64,25 @@ void	free_game_data(t_game_data *game_data)
 		free(game_data->exit_anim_data);
 }
 
+void	*load_and_check_texture(char *path, char *check_desc)
+{
+	void	*texture;
+
+	texture = mlx_load_png(path);
+	if (!texture)
+		check_error_img_or_texture(texture, check_desc, 1);
+	return (texture);
+}
+
 void	draw_end_img(t_game_data *gd)
 {
+	int	x;
+	int	y;
+
+	x = gd->size_x / 2 - 288;
+	y = gd->size_y / 2 + HEADER_HEIGHT - 162;
 	if (gd->win)
-		mlx_put_image_to_window(gd->mlx, gd->window, gd->sprites->win_resized, 0, HEADER_HEIGHT);
+		mlx_image_to_window(gd->mlx, gd->sprites->win, x, y);
 	else
-		mlx_put_image_to_window(gd->mlx, gd->window, gd->sprites->lost_resized, 0, HEADER_HEIGHT);
+		mlx_image_to_window(gd->mlx, gd->sprites->lost, x, y);
 }
