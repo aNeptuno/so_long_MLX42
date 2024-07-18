@@ -26,7 +26,7 @@ int	close_window(t_game_data *gd)
 		ft_putstr("\nThanks for playing ^^!\n");
 		ft_putstr("\033[0m\n");
 	}
-	if (gd->window)
+	/* if (gd->window)
 	{
 		mlx_destroy_window(gd->mlx, gd->window);
 		gd->window = NULL;
@@ -35,7 +35,7 @@ int	close_window(t_game_data *gd)
 	{
 		mlx_destroy_display(gd->mlx);
 		gd->mlx = NULL;
-	}
+	} */
 	//free_game_data(gd);
 	exit(EXIT_SUCCESS);
 	return (0);

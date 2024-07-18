@@ -115,8 +115,10 @@ void	update_animations(t_anim_data *anim_data)
 	}
 }
 
-int	render_next_frame_loop(t_game_data *gd)
+void	render_next_frame_loop(void	*param)
 {
+	t_game_data	*gd;
+	gd = (t_game_data *)param;
 	gd->update_counter++;
 	if (gd->update_counter >= UPDATE_FREQ && !gd->game_ended)
 	{
@@ -132,12 +134,12 @@ int	render_next_frame_loop(t_game_data *gd)
 		update_animations(gd->exit_anim_data);
 		if (gd->mlx && gd->window)
 		{
-			mlx_clear_window(gd->mlx, gd->window);
+			//mlx_clear_window(gd->mlx, gd->window);
 			put_map(gd);
 		}
 		move_enemies(gd);
 	}
 	else if (gd->game_ended)
 		draw_end_img(gd);
-	return (0);
+	return ;
 }

@@ -15,8 +15,7 @@ NAME = so_long
 
 # COMPILER AND FLAGS
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g
-INCLUDES = -Iincludes -Imlx
+CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -g
 
 # COLORS
 BLACK = "\033[0;30m"
@@ -58,41 +57,40 @@ SRC_FILES = $(LIBFT_DIR)/ft_split.c \
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
 # MLX
-MLX_DIR = mlx
-MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
-MLX_LIB = $(MLX_DIR)/libmlx.a
+MLX_DIR = ./MLX42
+MLX := $(MLX_DIR)/libmlx42.a
+MLX_FLAGS   := -ldl -pthread -lm
+HEADERS	:= -I ./includes -I$(MLX_DIR)/include
 
 # RULES #
-all: subsystems $(NAME)
+all: libmlx $(NAME)
+
+libmlx:
+	@echo $(CYAN)
+	@make -C $(MLX_DIR)
+	@echo $(NC)
 
 %.o : %.c
 	@echo $(MAGENTA)Compiling [$<]...$(NC)
-	@$(CC) $(CFLAGS) $(INCLUDES) -c -o $@ $<
+	@$(CC) $(CFLAGS) $(HEADERS) -c -o $@ $<
 	@printf $(UP)$(CUT)
 
-subsystems:
-	@echo $(CYAN)
-	make -C $(MLX_DIR) all > /dev/null
-	@echo $(NC)
 
 $(NAME): $(OBJ_FILES)
 	@echo $(MAGENTA)Compiling [$(SRC_FILES)]...$(NC)
 	@echo $(GREEN)Finished [$(SRC_FILES)]$(NC)
 	@echo
 	@echo $(MAGENTA)Compiling [$(NAME)]...$(NC)
-	@$(CC) $(CFLAGS) $(INCLUDES) $(MLX_FLAGS) $(OBJ_FILES) $(MLX_LIB) -o $(NAME)
+	@$(CC) $(OBJ_FILES) $(HEADERS) $(MLX) -ldl -lglfw -pthread -lm -o $(NAME)
 	@echo $(GREEN)Compliation of [$(NAME)] is success 🎉$(NC)
 
 clean:
-	@make -C $(MLX_DIR) clean
-	@rm -f $(OBJ_FILES)
+	@make -C $(MLX_DIR) fclean
 	@echo $(RED)Cleaned [$(OBJ_FILES)]$(NC)
 
 fclean: clean
-	@make -C $(MLX_DIR) fclean
-	@rm -f $(NAME)
 	@echo $(RED)Cleaned [$(NAME)]$(NC)
 
 re: clean all
 
-.PHONY: all clean fclean re
+.PHONY: all, clean, fclean, re, libmlx

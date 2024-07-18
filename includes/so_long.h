@@ -17,7 +17,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
-# include <mlx.h>
+# include "../MLX42/include/MLX42/MLX42.h"
 
 # define MAX_ROWS 100
 # define MAX_COLS 100
@@ -182,7 +182,7 @@ int		key_release(int keycode, t_game_data *gd);
 void	put_map(t_game_data *gd);
 void	put_enemy(t_game_data *gd, int i, int j);
 void	put_animations(t_game_data *gd);
-int		render_next_frame_loop(t_game_data *gd);
+void	render_next_frame_loop(void	*gd);
 void	draw_end_img(t_game_data *gd);
 
 // Enemies

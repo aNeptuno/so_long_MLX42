@@ -107,10 +107,10 @@ void	init_sprites(t_game_data *gd)
 	rel_path = "./assets/bg.xpm";
 	gd->sprites->bg = mlx_xpm_file_to_image(gd->mlx,
 			rel_path, &w, &h);
-	check_error_img(gd->sprites->bg, "background");
+	/* check_error_img(gd->sprites->bg, "background");
 	resize_bg_image(gd, w, h);
 	init_walls_and_header(gd);
 	init_objects(gd);
 	init_sprites_player(gd);
-	load_animations(gd);
+	load_animations(gd); */
 }
