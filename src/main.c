@@ -6,7 +6,7 @@
 /*   By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 19:32:07 by adiban-i          #+#    #+#             */
-/*   Updated: 2024/07/19 12:20:49 by adiban-i         ###   ########.fr       */
+/*   Updated: 2024/07/19 14:43:03 by adiban-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	main(int ac, char **av)
 			mlx_loop_hook(game_data.mlx, render_next_frame_loop, &game_data);
 			mlx_loop(game_data.mlx);
 			mlx_terminate(game_data.mlx);
+			free_game_data(&game_data);
 			return (EXIT_SUCCESS);
 		}
 	}
