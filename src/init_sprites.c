@@ -6,7 +6,7 @@
 /*   By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:47:35 by adiban-i          #+#    #+#             */
-/*   Updated: 2024/07/18 15:03:20 by adiban-i         ###   ########.fr       */
+/*   Updated: 2024/07/19 13:13:24 by adiban-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ static void	init_walls_and_header(t_game_data *gd)
 	texture = load_and_check_texture("./assets/title.png", "header");
 	gd->sprites->header = mlx_texture_to_image(gd->mlx, texture);
 	check_error_img_or_texture(gd->sprites->header, "header", 0);
-	texture = load_and_check_texture("./assets/bg/black.png", "header_bg");
-	gd->sprites->header_bg = mlx_texture_to_image(gd->mlx, texture);
-	check_error_img_or_texture(gd->sprites->header_bg, "header_bg", 0);
+	texture = load_and_check_texture("./assets/bg/black.png", "clean_img");
+	gd->sprites->clean_img = mlx_texture_to_image(gd->mlx, texture);
+	check_error_img_or_texture(gd->sprites->clean_img, "clean_img", 0);
 	texture = load_and_check_texture("./assets/bg/gamendlost.png", "lost");
 	gd->sprites->lost = mlx_texture_to_image(gd->mlx, texture);
 	check_error_img_or_texture(gd->sprites->lost, "lost", 0);
@@ -80,7 +80,7 @@ static void	init_objects(t_game_data *gd)
 	gd->sprites->exit = mlx_texture_to_image(gd->mlx, texture);
 	check_error_img_or_texture(gd->sprites->exit, "exit", 0);
 	texture = load_and_check_texture("./assets/slimeman.png", "enemy");
-	gd->sprites->enemy= mlx_texture_to_image(gd->mlx, texture);
+	gd->sprites->enemy = mlx_texture_to_image(gd->mlx, texture);
 	check_error_img_or_texture(gd->sprites->enemy, "enemy", 0);
 	mlx_delete_texture(texture);
 }

@@ -6,7 +6,7 @@
 /*   By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 01:53:27 by adiban-i          #+#    #+#             */
-/*   Updated: 2024/07/18 15:26:54 by adiban-i         ###   ########.fr       */
+/*   Updated: 2024/07/19 13:13:06 by adiban-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	close_window(void *param)
 {
-	t_game_data *gd;
+	t_game_data	*gd;
 
 	gd = (t_game_data *) param;
 	if (!gd->game_ended)
@@ -66,15 +66,14 @@ static void	update_animations(t_anim_data *anim_data)
 void	render_next_frame_loop(void	*param)
 {
 	t_game_data	*gd;
+	
 	gd = (t_game_data *)param;
 	gd->update_counter++;
-	if (gd->update_counter >= 3 && !gd->game_ended)
+	if (gd->update_counter >= UPDATE_FREQ && !gd->game_ended)
 	{
-		gd->update_counter = 0;
+		gd->update_counter = 0.0;
 		update_animations(gd->exit_anim_data);
 		put_animations(gd);
-		/* if (gd->mlx)
-			put_map(gd); */
 		//move_enemies(gd);
 	}
 	else if (gd->game_ended)

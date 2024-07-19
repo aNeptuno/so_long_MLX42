@@ -6,7 +6,7 @@
 /*   By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 13:24:42 by adiban-i          #+#    #+#             */
-/*   Updated: 2024/07/18 14:56:59 by adiban-i         ###   ########.fr       */
+/*   Updated: 2024/07/19 13:51:02 by adiban-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <time.h>
 # include "../MLX42/include/MLX42/MLX42.h"
 
 # define MAX_ROWS 100
@@ -29,7 +30,7 @@
 # define LEFT 97
 # define PIXELS 32
 # define HEADER_HEIGHT 80
-# define UPDATE_FREQ 1000
+# define UPDATE_FREQ 5
 
 typedef struct s_point
 {
@@ -56,7 +57,6 @@ typedef struct s_anim_data
 	int	position_y;
 }	t_anim_data;
 
-
 /// @brief Structure for game sprites (mlx_xpm_file_to_image)
 typedef struct s_sprites
 {
@@ -71,7 +71,7 @@ typedef struct s_sprites
 	void	*collectable;
 	void	*exit;
 	void	*header;
-	void	*header_bg;
+	void	*clean_img;
 	void	*exit_anim_frames[6];
 	void	*enemy;
 }		t_sprites;
@@ -81,6 +81,7 @@ typedef struct s_enemy
 {
 	t_point	*position;
 	int		move_direction;
+	int		vertical;
 }	t_enemy;
 
 /// @brief Structure for saving game data
@@ -102,7 +103,6 @@ typedef struct s_enemy
  * @player: Pointer to the player position structure.
  * @new_move: New move direction: U (up), D(down), L(left), R(right).
  * @player_items: Number of items collected by the player.
- * @update_counter: Counter for updating the game state.
  * @game_ended: Flag indicating if the game has ended.
  * @exit_anim_data: Contains necessary data to render exit animation.
  */
@@ -125,7 +125,6 @@ typedef struct s_game_data
 	t_point		*player;
 	char		new_move;
 	int			player_items;
-	int			update_counter;
 	int			game_ended;
 	t_anim_data	*exit_anim_data;
 	t_enemy		*enemies;
@@ -133,6 +132,7 @@ typedef struct s_game_data
 	int			enemy_index;
 	int			enemy_move_counter;
 	int			win;
+	double		update_counter;
 }	t_game_data;
 
 // Libft functions
@@ -170,6 +170,7 @@ void	close_window(void *gd);
 // Sprites rendering and character movement
 void	put_map(t_game_data *gd);
 void	put_enemy(t_game_data *gd, int i, int j);
+void	handle_exit_sprite(t_game_data *gd, int j, int i);
 void	put_animations(t_game_data *gd);
 void	render_next_frame_loop(void	*param);
 void	draw_end_img(t_game_data *gd);
@@ -178,5 +179,7 @@ void	move_player(int coord_x, int coord_y, t_game_data *gd);
 // Enemies
 void	move_enemies(t_game_data *gd);
 void	touch_enemy(t_game_data *gd);
+void	check_vertical(t_game_data *gd, t_enemy *enemy);
+int		enemy_can_move(char c);
 
 #endif

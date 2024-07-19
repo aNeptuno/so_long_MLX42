@@ -6,7 +6,7 @@
 /*   By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 02:54:40 by adiban-i          #+#    #+#             */
-/*   Updated: 2024/07/18 14:55:25 by adiban-i         ###   ########.fr       */
+/*   Updated: 2024/07/19 13:02:21 by adiban-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	draw_end_img(t_game_data *gd)
 	int	y;
 
 	x = gd->size_x / 2 - 288;
-	y = gd->size_y / 2 + HEADER_HEIGHT - 162;
+	y = gd->size_y / 2 + HEADER_HEIGHT / 2 - 162;
 	if (gd->win)
 		mlx_image_to_window(gd->mlx, gd->sprites->win, x, y);
 	else
