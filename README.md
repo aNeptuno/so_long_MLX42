@@ -67,12 +67,12 @@ The game uses a map file with the `.ber` extension. The map file format must fol
 
 ## Example Map
 
-Here is an example of a valid map file:
-111111
-1P0C01
-1C0C01
-1E00001
-111111
+Here is an example of a valid map file: <br>
+111111 <br>
+1P0C01 <br>
+1C0C01 <br>
+1E00001 <br>
+111111 <br>
 
 ## Screenshoots
 
