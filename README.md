@@ -1,4 +1,4 @@
-# so_long 🎮🗺️
+# so_long 🎮 🗺️
 
 Welcome to the `so_long` project! 🚀 This is a 2D maze game project from 42 School where you navigate through a maze, collect items, and reach the exit. This project uses the `mlx42` library for handling graphics and user input.
 
