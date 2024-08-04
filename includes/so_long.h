@@ -6,7 +6,7 @@
 /*   By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 13:24:42 by adiban-i          #+#    #+#             */
-/*   Updated: 2024/07/19 13:51:02 by adiban-i         ###   ########.fr       */
+/*   Updated: 2024/07/30 12:13:51 by adiban-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ char	*ft_strjoin(char const *s1, char const *s2);
 
 // Game initialization and data cleaning
 void	get_map(t_game_data *game_data, char *file_content);
-void	*load_and_check_texture(char *path, char *check_desc);
+void	load_and_check_texture(char *path, char *check_desc, char *texture);
 void	check_error_img_or_texture(void *img, char *info, int texture);
 void	init_sprites(t_game_data *game_data);
 void	init_enemies(t_game_data *gd);

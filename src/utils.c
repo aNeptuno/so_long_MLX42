@@ -6,7 +6,7 @@
 /*   By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 02:54:40 by adiban-i          #+#    #+#             */
-/*   Updated: 2024/07/19 14:53:18 by adiban-i         ###   ########.fr       */
+/*   Updated: 2024/07/30 12:10:17 by adiban-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	error_and_free(t_game_data *game_data, char *msg)
 	return ;
 }
 
-/* static void	free_sprites(t_game_data *gd)
+static void	free_sprites(t_game_data *gd)
 {
 	int	i;
 
@@ -53,7 +53,7 @@ void	error_and_free(t_game_data *game_data, char *msg)
 		}
 		free(gd->sprites);
 	}
-} */
+}
 
 void	free_game_data(t_game_data *game_data)
 {
@@ -76,7 +76,7 @@ void	free_game_data(t_game_data *game_data)
 		}
 		if (game_data->sprites)
 			free(game_data->sprites);
-		//free_sprites(game_data);
+		free_sprites(game_data);
 		if (game_data->player)
 			free(game_data->player);
 		if (game_data->exit_anim_data)

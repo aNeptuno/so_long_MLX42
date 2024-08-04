@@ -6,7 +6,7 @@
 /*   By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 19:32:07 by adiban-i          #+#    #+#             */
-/*   Updated: 2024/07/19 14:43:03 by adiban-i         ###   ########.fr       */
+/*   Updated: 2024/07/30 12:03:11 by adiban-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	main(int ac, char **av)
 		{
 			init_mlx(&game_data);
 			init_game(&game_data);
-			
 			mlx_key_hook(game_data.mlx, move_hook, &game_data);
 			mlx_close_hook(game_data.mlx, close_window, &game_data);
 			mlx_loop_hook(game_data.mlx, render_next_frame_loop, &game_data);
