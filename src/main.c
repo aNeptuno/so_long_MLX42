@@ -36,7 +36,7 @@ static void	init_game(t_game_data *gd)
 	gd->update_counter = 0;
 	init_enemies(gd);
 	init_sprites(gd);
-	//put_map(gd);
+	put_map(gd);
 }
 
 int	main(int ac, char **av)
@@ -52,7 +52,7 @@ int	main(int ac, char **av)
 			init_game(&game_data);
 			mlx_key_hook(game_data.mlx, move_hook, &game_data);
 			mlx_close_hook(game_data.mlx, close_window, &game_data);
-			mlx_loop_hook(game_data.mlx, render_next_frame_loop, &game_data);
+			//mlx_loop_hook(game_data.mlx, render_next_frame_loop, &game_data);
 			mlx_loop(game_data.mlx);
 			mlx_terminate(game_data.mlx);
 			free_game_data(&game_data);

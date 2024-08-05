@@ -2,6 +2,5 @@
 *.out
 *.a
 *.o
-mlx
 vgcore.*
 libft

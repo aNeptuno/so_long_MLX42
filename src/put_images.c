@@ -12,6 +12,16 @@
 
 #include "so_long.h"
 
+void	reset_imgs(t_game_data *gd)
+{
+	mlx_delete_image(gd->mlx, gd->sprites->player_up);
+	mlx_delete_image(gd->mlx, gd->sprites->player_left);
+	mlx_delete_image(gd->mlx, gd->sprites->player_right);
+	mlx_delete_image(gd->mlx, gd->sprites->player_down);
+	mlx_delete_image(gd->mlx, gd->sprites->collectable);
+	mlx_delete_image(gd->mlx, gd->sprites->enemy);
+}
+
 static void	put_player(t_game_data *gd, int i, int j)
 {
 	void	*player_sprite;
@@ -34,7 +44,7 @@ static void	put_object_sprite(t_game_data *gd, char c, int i, int j)
 {
 	if (c == 'P')
 		put_player(gd, i, j);
-	else if (c == '1')
+	else if (c == '1' && gd->first_init)
 	{
 		mlx_image_to_window(gd->mlx, gd->sprites->obstacle,
 			j * PIXELS, (i * PIXELS) + HEADER_HEIGHT);
@@ -89,9 +99,12 @@ void	put_map(t_game_data *gd)
 	int	i;
 	int	j;
 
-	mlx_image_to_window(gd->mlx, gd->sprites->clean_img, 0, 0);
-	draw_header(gd);
-	mlx_image_to_window(gd->mlx, gd->sprites->bg, 0, HEADER_HEIGHT);
+	if (gd->first_init)
+	{
+		mlx_image_to_window(gd->mlx, gd->sprites->clean_img, 0, 0);
+		draw_header(gd);
+		mlx_image_to_window(gd->mlx, gd->sprites->bg, 0, HEADER_HEIGHT);
+	}
 	i = 0;
 	while (i < gd->rows)
 	{

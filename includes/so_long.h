@@ -57,7 +57,7 @@ typedef struct s_anim_data
 	int	position_y;
 }	t_anim_data;
 
-/// @brief Structure for game sprites (mlx_xpm_file_to_image)
+/// @brief Structure for game sprites
 typedef struct s_sprites
 {
 	void	*bg;
@@ -74,6 +74,13 @@ typedef struct s_sprites
 	void	*clean_img;
 	void	*exit_anim_frames[6];
 	void	*enemy;
+
+	void	*enemy_text;
+	void	*collectable_text;
+	void	*player_up_text;
+	void	*player_left_text;
+	void	*player_right_text;
+	void	*player_down_text;
 }		t_sprites;
 
 /// @brief Structure for enemy data

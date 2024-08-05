@@ -29,7 +29,6 @@ void	close_window(void *param)
 		ft_putstr("\nThanks for playing ^^!\n");
 		ft_putstr("\033[0m\n");
 	}
-	//free_game_data(gd);
 	mlx_close_window(gd->mlx);
 	exit(EXIT_SUCCESS);
 }
@@ -49,10 +48,9 @@ void	move_hook(mlx_key_data_t keydata, void *data)
 		move_player(-1, 0, gd);
 	else if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
 		move_player(1, 0, gd);
-	put_map(gd);
 }
 
-static void	update_animations(t_anim_data *anim_data)
+void	update_animations(t_anim_data *anim_data)
 {
 	anim_data->frame_counter++;
 	if (anim_data->frame_counter >= anim_data->frame_delay)
@@ -66,7 +64,7 @@ static void	update_animations(t_anim_data *anim_data)
 void	render_next_frame_loop(void	*param)
 {
 	t_game_data	*gd;
-	
+
 	gd = (t_game_data *)param;
 	gd->update_counter++;
 	if (gd->update_counter >= UPDATE_FREQ && !gd->game_ended)

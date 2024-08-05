@@ -69,6 +69,7 @@ static void	move_exit(t_game_data *gd)
 		display_stats(gd, 0);
 		ft_putstr("\033[0m\n");
 		gd->win = 1;
+		//draw_end_img(gd);
 	}
 	else
 	{
@@ -78,6 +79,7 @@ static void	move_exit(t_game_data *gd)
 		ft_putstr("\nYou failed your mission to collect them all :(\n");
 		display_stats(gd, 0);
 		ft_putstr("\033[0m\n");
+		//draw_end_img(gd);
 	}
 }
 
@@ -88,6 +90,9 @@ void	move_player(int coord_x, int coord_y, t_game_data *gd)
 	c = gd->map[gd->player->y - coord_y][gd->player->x + coord_x];
 	if (c != '1')
 	{
+		/* update_animations(gd->exit_anim_data);
+		put_animations(gd); */
+		/////
 		move_enemies(gd);
 		gd->map[gd->player->y][gd->player->x] = '0';
 		gd->player->y -= coord_y;
@@ -102,5 +107,6 @@ void	move_player(int coord_x, int coord_y, t_game_data *gd)
 			move_exit(gd);
 		if (c == 'M')
 			touch_enemy(gd);
+		put_map(gd);
 	}
 }
