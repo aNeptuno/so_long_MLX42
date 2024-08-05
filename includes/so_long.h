@@ -147,8 +147,6 @@ char	*ft_strjoin(char const *s1, char const *s2);
 
 // Game initialization and data cleaning
 void	get_map(t_game_data *game_data, char *file_content);
-void	load_and_check_texture(char *path, char *check_desc, char *texture);
-void	check_error_img_or_texture(void *img, char *info, int texture);
 void	init_sprites(t_game_data *game_data);
 void	init_enemies(t_game_data *gd);
 void	error_and_free(t_game_data *game_data, char *msg);

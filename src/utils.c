@@ -86,16 +86,6 @@ void	free_game_data(t_game_data *game_data)
 	}
 }
 
-void	*load_and_check_texture(char *path, char *check_desc)
-{
-	void	*texture;
-
-	texture = mlx_load_png(path);
-	if (!texture)
-		check_error_img_or_texture(texture, check_desc, 1);
-	return (texture);
-}
-
 void	draw_end_img(t_game_data *gd)
 {
 	int	x;

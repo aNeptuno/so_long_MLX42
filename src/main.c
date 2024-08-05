@@ -36,7 +36,7 @@ static void	init_game(t_game_data *gd)
 	gd->update_counter = 0;
 	init_enemies(gd);
 	init_sprites(gd);
-	put_map(gd);
+	//put_map(gd);
 }
 
 int	main(int ac, char **av)
@@ -61,7 +61,7 @@ int	main(int ac, char **av)
 	}
 	else
 	{
-		ft_putstr("Error\nInvalid arguments\nUsage: <map_name>.ber");
+		ft_putstr("Error\nInvalid arguments\nUsage: <map_name>.ber\n");
 		exit(EXIT_FAILURE);
 	}
 	return (0);

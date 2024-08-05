@@ -59,7 +59,7 @@ OBJ_FILES = $(SRC_FILES:.c=.o)
 # MLX
 MLX_DIR = ./MLX42
 MLX := $(MLX_DIR)/libmlx42.a
-MLX_FLAGS   := -ldl -pthread -lm
+MLX_FLAGS   := -ldl -pthread -lm -lglfw
 HEADERS	:= -I ./includes -I$(MLX_DIR)/include
 
 # RULES #
@@ -82,7 +82,7 @@ $(NAME): $(OBJ_FILES)
 	@echo $(GREEN)Finished [$(SRC_FILES)]$(NC)
 	@echo
 	@echo $(MAGENTA)Compiling [$(NAME)]...$(NC)
-	@$(CC) $(OBJ_FILES) $(HEADERS) $(MLX) -ldl -lglfw -pthread -lm -o $(NAME)
+	@$(CC) $(OBJ_FILES) $(HEADERS) $(MLX) $(MLX_FLAGS) -o $(NAME)
 	@echo $(GREEN)Compliation of [$(NAME)] is success 🎉$(NC)
 
 clean:
