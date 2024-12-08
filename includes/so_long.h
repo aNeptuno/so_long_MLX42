@@ -6,7 +6,7 @@
 /*   By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 13:24:42 by adiban-i          #+#    #+#             */
-/*   Updated: 2024/07/30 12:13:51 by adiban-i         ###   ########.fr       */
+/*   Updated: 2024/12/08 18:23:23 by adiban-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,12 +173,13 @@ void	close_window(void *gd);
 
 // Sprites rendering and character movement
 void	put_map(t_game_data *gd);
-void	put_enemy(t_game_data *gd, int i, int j);
+void	update_enemy(t_game_data *gd, int i, int j);
 void	handle_exit_sprite(t_game_data *gd, int j, int i);
 void	put_animations(t_game_data *gd);
 void	render_next_frame_loop(void	*param);
 void	draw_end_img(t_game_data *gd);
 void	move_player(int coord_x, int coord_y, t_game_data *gd);
+void	draw_img(t_game_data *gd, int i, int j, char *path);
 
 // Enemies
 void	move_enemies(t_game_data *gd);

@@ -6,7 +6,7 @@
 /*   By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 02:54:40 by adiban-i          #+#    #+#             */
-/*   Updated: 2024/07/30 12:10:17 by adiban-i         ###   ########.fr       */
+/*   Updated: 2024/12/08 18:53:37 by adiban-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	error_and_free(t_game_data *game_data, char *msg)
 	return ;
 }
 
-static void	free_sprites(t_game_data *gd)
+/* static void	free_sprites(t_game_data *gd)
 {
 	int	i;
 
@@ -53,7 +53,7 @@ static void	free_sprites(t_game_data *gd)
 		}
 		free(gd->sprites);
 	}
-}
+} */
 
 void	free_game_data(t_game_data *game_data)
 {
@@ -74,7 +74,7 @@ void	free_game_data(t_game_data *game_data)
 			}
 			free(game_data->map);
 		}
-		if (game_data->sprites)
+		/* if (game_data->sprites)
 			free(game_data->sprites);
 		free_sprites(game_data);
 		if (game_data->player)
@@ -82,19 +82,7 @@ void	free_game_data(t_game_data *game_data)
 		if (game_data->exit_anim_data)
 			free(game_data->exit_anim_data);
 		if (game_data->enemies)
-			free (game_data->enemies);
+			free (game_data->enemies); */
 	}
 }
 
-void	draw_end_img(t_game_data *gd)
-{
-	int	x;
-	int	y;
-
-	x = gd->size_x / 2 - 288;
-	y = gd->size_y / 2 + HEADER_HEIGHT / 2 - 162;
-	if (gd->win)
-		mlx_image_to_window(gd->mlx, gd->sprites->win, x, y);
-	else
-		mlx_image_to_window(gd->mlx, gd->sprites->lost, x, y);
-}

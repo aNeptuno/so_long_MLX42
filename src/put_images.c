@@ -6,13 +6,13 @@
 /*   By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:21:58 by adiban-i          #+#    #+#             */
-/*   Updated: 2024/07/19 13:12:45 by adiban-i         ###   ########.fr       */
+/*   Updated: 2024/12/08 18:23:54 by adiban-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	reset_imgs(t_game_data *gd)
+/* void	reset_imgs(t_game_data *gd)
 {
 	mlx_delete_image(gd->mlx, gd->sprites->player_up);
 	mlx_delete_image(gd->mlx, gd->sprites->player_left);
@@ -20,6 +20,35 @@ void	reset_imgs(t_game_data *gd)
 	mlx_delete_image(gd->mlx, gd->sprites->player_down);
 	mlx_delete_image(gd->mlx, gd->sprites->collectable);
 	mlx_delete_image(gd->mlx, gd->sprites->enemy);
+} */
+
+void	draw_img(t_game_data *gd, int i, int j, char *path)
+{
+	mlx_texture_t	*texture;
+	mlx_image_t		*img;
+
+	texture = mlx_load_png(path);
+	if (!texture)
+	{
+		ft_putstr("Error\nError loading texture-> ");
+		perror(path);
+		exit(EXIT_FAILURE);
+	}
+	img = mlx_texture_to_image(gd->mlx, texture);
+	mlx_delete_texture(texture);
+	if (!img)
+	{
+		ft_putstr("Error\nError loading image-> ");
+		perror(path);
+		exit(EXIT_FAILURE);
+	}
+	if (mlx_image_to_window(gd->mlx, img,
+			j * PIXELS, (i * PIXELS) + HEADER_HEIGHT) < 0)
+	{
+		ft_putstr("Error\nError instanciating img-> ");
+		perror(path);
+		exit(EXIT_FAILURE);
+	}
 }
 
 static void	put_player(t_game_data *gd, int i, int j)
@@ -27,15 +56,13 @@ static void	put_player(t_game_data *gd, int i, int j)
 	void	*player_sprite;
 
 	if (gd->new_move == 'D')
-		player_sprite = gd->sprites->player_down;
+		draw_img(gd, i, j, "./assets/cat_down.png");
 	if (gd->new_move == 'U')
-		player_sprite = gd->sprites->player_up;
+		draw_img(gd, i, j, "./assets/cat_up.png");
 	if (gd->new_move == 'L')
-		player_sprite = gd->sprites->player_left;
+		draw_img(gd, i, j, "./assets/cat_left.png");
 	if (gd->new_move == 'R')
-		player_sprite = gd->sprites->player_right;
-	mlx_image_to_window(gd->mlx, player_sprite,
-		j * PIXELS, (i * PIXELS) + HEADER_HEIGHT);
+		draw_img(gd, i, j, "./assets/cat_right.png");
 	gd->player->x = j;
 	gd->player->y = i;
 }
@@ -45,24 +72,21 @@ static void	put_object_sprite(t_game_data *gd, char c, int i, int j)
 	if (c == 'P')
 		put_player(gd, i, j);
 	else if (c == '1' && gd->first_init)
-	{
-		mlx_image_to_window(gd->mlx, gd->sprites->obstacle,
-			j * PIXELS, (i * PIXELS) + HEADER_HEIGHT);
-	}
+		draw_img(gd, i, j, "./assets/wall.png");
 	else if (c == 'E' && gd->first_init)
 	{
 		handle_exit_sprite(gd, j, i);
 	}
 	else if (c == 'C')
 	{
-		mlx_image_to_window(gd->mlx, gd->sprites->collectable,
-			j * PIXELS, (i * PIXELS) + HEADER_HEIGHT);
+		draw_img(gd, i, j, "./assets/item.png");
 		if (gd->first_init)
 			gd->map_items++;
 	}
 	else if (c == 'M')
 	{
-		put_enemy(gd, i, j);
+		draw_img(gd, i, j, "./assets/slimeman.png");
+		update_enemy(gd, i, j);
 		gd->enemy_index++;
 	}
 }

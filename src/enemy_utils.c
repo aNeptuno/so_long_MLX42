@@ -6,7 +6,7 @@
 /*   By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 13:14:12 by adiban-i          #+#    #+#             */
-/*   Updated: 2024/07/19 13:52:10 by adiban-i         ###   ########.fr       */
+/*   Updated: 2024/12/08 18:22:29 by adiban-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,8 @@ void	touch_enemy(t_game_data *gd)
 }
 
 // Draw enemy on map
-void	put_enemy(t_game_data *gd, int i, int j)
+void	update_enemy(t_game_data *gd, int i, int j)
 {
-	mlx_image_to_window(gd->mlx, gd->sprites->enemy,
-		j * PIXELS, (i * PIXELS) + HEADER_HEIGHT);
 	if (gd->enemy_index < gd->num_enemies)
 	{
 		gd->enemies[gd->enemy_index].position->x = j;

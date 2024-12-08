@@ -6,7 +6,7 @@
 /*   By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 14:21:29 by adiban-i          #+#    #+#             */
-/*   Updated: 2024/07/19 14:53:53 by adiban-i         ###   ########.fr       */
+/*   Updated: 2024/12/08 18:25:47 by adiban-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	move_exit(t_game_data *gd)
 		display_stats(gd, 0);
 		ft_putstr("\033[0m\n");
 		gd->win = 1;
-		//draw_end_img(gd);
+		draw_end_img(gd);
 	}
 	else
 	{
@@ -79,7 +79,7 @@ static void	move_exit(t_game_data *gd)
 		ft_putstr("\nYou failed your mission to collect them all :(\n");
 		display_stats(gd, 0);
 		ft_putstr("\033[0m\n");
-		//draw_end_img(gd);
+		draw_end_img(gd);
 	}
 }
 
