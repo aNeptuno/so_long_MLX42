@@ -74,7 +74,6 @@ typedef struct s_sprites
 	void	*clean_img;
 	void	*exit_anim_frames[6];
 	void	*enemy;
-
 	void	*enemy_text;
 	void	*collectable_text;
 	void	*player_up_text;

@@ -30,7 +30,8 @@ static void	load_texture_img(char *path, void **sprite, t_game_data *gd)
 		perror(path);
 		exit(EXIT_FAILURE);
 	}
-	mlx_delete_image(gd->mlx, texture);
+	//mlx_delete_image(gd->mlx, texture);
+	mlx_delete_texture(texture);
 }
 
 /// @brief Loads texture and save it to be able to make an img from it later

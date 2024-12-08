@@ -34,7 +34,7 @@ static void	init_game(t_game_data *gd)
 	gd->win = 0;
 	gd->exit_anim_data = malloc(sizeof(t_anim_data));
 	gd->update_counter = 0;
-	init_enemies(gd);
+	init_enemies(gd); // ?
 	init_sprites(gd);
 	put_map(gd);
 }
