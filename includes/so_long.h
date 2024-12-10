@@ -60,26 +60,26 @@ typedef struct s_anim_data
 /// @brief Structure for game sprites
 typedef struct s_sprites
 {
-	void	*bg;
-	void	*lost;
-	void	*win;
-	void	*player_up;
+	/* void	*bg; */
+	/* void	*lost;
+	void	*win; */
+	/* void	*player_up;
 	void	*player_left;
 	void	*player_right;
 	void	*player_down;
 	void	*obstacle;
-	void	*collectable;
+	void	*collectable; */
 	void	*exit;
-	void	*header;
-	void	*clean_img;
+	/* void	*header;
+	void	*clean_img; */
 	void	*exit_anim_frames[6];
-	void	*enemy;
-	void	*enemy_text;
+	/* void	*enemy; */
+	/* void	*enemy_text;
 	void	*collectable_text;
 	void	*player_up_text;
 	void	*player_left_text;
 	void	*player_right_text;
-	void	*player_down_text;
+	void	*player_down_text; */
 }		t_sprites;
 
 /// @brief Structure for enemy data

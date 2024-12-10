@@ -52,7 +52,7 @@ static void	load_texture_into_data(void **text, char *path, void **img, t_game_d
 		exit(EXIT_FAILURE);
 	}
 }
-static void	init_sprites_player(t_game_data *gd)
+/* static void	init_sprites_player(t_game_data *gd)
 {
 	load_texture_into_data(&gd->sprites->player_up_text, "./assets/cat_up.png",
 		&gd->sprites->player_up, gd);
@@ -62,21 +62,21 @@ static void	init_sprites_player(t_game_data *gd)
 		&gd->sprites->player_left, gd);
 	load_texture_into_data(&gd->sprites->player_right_text, "./assets/cat_right.png",
 		&gd->sprites->player_right, gd);
-}
+} */
 
 static void	init_objects(t_game_data *gd)
 {
-	load_texture_img("./assets/bg/bg.png", &gd->sprites->bg, gd);
-	load_texture_img("./assets/wall.png", &gd->sprites->obstacle, gd);
-	load_texture_img("./assets/title.png", &gd->sprites->header, gd);
-	load_texture_img("./assets/bg/black.png", &gd->sprites->clean_img, gd);
-	load_texture_img("./assets/bg/gamendlost.png", &gd->sprites->lost, gd);
+	/* load_texture_img("./assets/bg/bg.png", &gd->sprites->bg, gd); */
+	/* load_texture_img("./assets/wall.png", &gd->sprites->obstacle, gd); */
+	/* load_texture_img("./assets/title.png", &gd->sprites->header, gd);
+	load_texture_img("./assets/bg/black.png", &gd->sprites->clean_img, gd); */
+	/* load_texture_img("./assets/bg/gamendlost.png", &gd->sprites->lost, gd);
 	load_texture_img("./assets/bg/gamendwin.png", &gd->sprites->win, gd);
 	load_texture_img("./assets/exit.png", &gd->sprites->exit, gd);
 	load_texture_into_data(&gd->sprites->collectable_text, "./assets/item.png",
 		&gd->sprites->collectable, gd);
 	load_texture_into_data(&gd->sprites->enemy_text, "./assets/slimeman.png",
-		&gd->sprites->enemy, gd);
+		&gd->sprites->enemy, gd); */
 }
 
 void	init_sprites(t_game_data *gd)
@@ -87,7 +87,7 @@ void	init_sprites(t_game_data *gd)
 		perror("Error\nMalloc failed for game_data.sprites\n");
 		exit(EXIT_FAILURE);
 	}
-	init_objects(gd);
-	init_sprites_player(gd);
+	//init_objects(gd);
+	//init_sprites_player(gd);
 	load_animations(gd);
 }

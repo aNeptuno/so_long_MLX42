@@ -51,6 +51,34 @@ void	draw_img(t_game_data *gd, int i, int j, char *path)
 	}
 }
 
+static void	draw_init(t_game_data *gd, int i, int j, char *path)
+{
+	mlx_texture_t	*texture;
+	mlx_image_t		*img;
+
+	texture = mlx_load_png(path);
+	if (!texture)
+	{
+		ft_putstr("Error\nError loading texture-> ");
+		perror(path);
+		exit(EXIT_FAILURE);
+	}
+	img = mlx_texture_to_image(gd->mlx, texture);
+	mlx_delete_texture(texture);
+	if (!img)
+	{
+		ft_putstr("Error\nError loading image-> ");
+		perror(path);
+		exit(EXIT_FAILURE);
+	}
+	if (mlx_image_to_window(gd->mlx, img, j, i) < 0)
+	{
+		ft_putstr("Error\nError instanciating img-> ");
+		perror(path);
+		exit(EXIT_FAILURE);
+	}
+}
+
 static void	put_player(t_game_data *gd, int i, int j)
 {
 	void	*player_sprite;
@@ -107,7 +135,7 @@ static void	draw_header(t_game_data *gd)
 	collected_x = gd->size_x / 20;
 	moves = ft_itoa(gd->player_moves);
 	items = ft_itoa(gd->player_items);
-	mlx_image_to_window(gd->mlx, gd->sprites->header, title_x, 0);
+	draw_init(gd, title_x, 0, "./assets/title.png");
 	ft_mlx_string(gd, gd->size_x / 3 - 20, 45,
 		"Cybercat Chronicles: The Ancient Floppy Hunt");
 	ft_mlx_string(gd, gd->size_x - 200, 30, "Player Moves: ");
@@ -118,6 +146,8 @@ static void	draw_header(t_game_data *gd)
 	free(items);
 }
 
+
+
 void	put_map(t_game_data *gd)
 {
 	int	i;
@@ -125,9 +155,9 @@ void	put_map(t_game_data *gd)
 
 	if (gd->first_init)
 	{
-		mlx_image_to_window(gd->mlx, gd->sprites->clean_img, 0, 0);
+		draw_init(gd, 0, 0, "./assets/bg/black.png");
 		draw_header(gd);
-		mlx_image_to_window(gd->mlx, gd->sprites->bg, 0, HEADER_HEIGHT);
+		draw_init(gd, 0, HEADER_HEIGHT, "./assets/bg/bg.png");
 	}
 	i = 0;
 	while (i < gd->rows)

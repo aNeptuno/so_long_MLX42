@@ -80,11 +80,12 @@ void	handle_exit_sprite(t_game_data *gd, int j, int i)
 {
 	if (gd->first_init)
 	{
-		mlx_image_to_window(gd->mlx, gd->sprites->exit,
-			j * PIXELS, (i * PIXELS) + HEADER_HEIGHT);
+		draw_img(gd, i, j, "./assets/exit.png");
 		gd->exit_anim_data->position_x = j * PIXELS;
 		gd->exit_anim_data->position_y = (i * PIXELS) + HEADER_HEIGHT;
 	}
 	else
+	{
 		put_animations(gd);
+	}
 }

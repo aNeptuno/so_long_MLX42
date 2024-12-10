@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-void	draw_end_img(t_game_data *gd)
+/* void	draw_end_img(t_game_data *gd)
 {
 	int	x;
 	int	y;
@@ -23,7 +23,7 @@ void	draw_end_img(t_game_data *gd)
 		mlx_image_to_window(gd->mlx, gd->sprites->win, x, y);
 	else
 		mlx_image_to_window(gd->mlx, gd->sprites->lost, x, y);
-}
+} */
 
 void	draw_end_img_util(t_game_data *gd, mlx_image_t *img, char *path)
 {
@@ -41,11 +41,16 @@ void	draw_end_img_util(t_game_data *gd, mlx_image_t *img, char *path)
 }
 
 
-void	draw_end_img(t_game_data *gd, char *path)
+void	draw_end_img(t_game_data *gd)
 {
 	mlx_texture_t	*texture;
 	mlx_image_t		*img;
+	char			*path;
 
+	if (gd->win)
+		path = "./assets/bg/gamendwin.png";
+	else
+		path = "./assets/bg/gamendlost.png";
 	texture = mlx_load_png(path);
 	if (!texture)
 	{
@@ -62,7 +67,7 @@ void	draw_end_img(t_game_data *gd, char *path)
 		exit(EXIT_FAILURE);
 	}
 	if (gd->win)
-		draw_end_img_util(gd->mlx, img, "./assets/bg/gamendwin.png");
+		draw_end_img_util(gd->mlx, img, path);
 	else
-		draw_end_img_util(gd->mlx, img, "./assets/bg/gamendlost.png");
+		draw_end_img_util(gd->mlx, img, path);
 }
