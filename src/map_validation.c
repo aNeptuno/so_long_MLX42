@@ -25,8 +25,9 @@ static int	is_char_of_map(char c)
 {
 	int	is_char;
 
-	is_char = (c == 'C' || c == 'P' || c == 'E' || c == '\n');
-	return (c == '1' || c == '0' || is_char || c == 'M');
+	is_char = (c == 'C' || c == 'P' || c == 'E' || c == '\n'
+		|| c == '1' || c == '0' || c == 'M');
+	return (is_char);
 }
 
 static int	char_count(char charToCount, char *file)
