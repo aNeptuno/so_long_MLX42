@@ -77,6 +77,7 @@ static int	validate_map_chars(t_game_data *game_data)
 
 void	validate_map(t_game_data *game_data)
 {
+	remove_carriage_return(game_data->file_content);
 	if (!validate_map_chars(game_data))
 		exit(EXIT_FAILURE);
 	get_cols(game_data);

@@ -24,6 +24,25 @@ void	error_and_free(t_game_data *game_data, char *msg)
 	return ;
 }
 
+void	remove_carriage_return(char *str)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		if (str[i] != '\r')
+		{
+			str[j] = str[i];
+			j++;
+		}
+		i++;
+	}
+	str[j] = '\0';
+}
+
 /* static void	free_sprites(t_game_data *gd)
 {
 	int	i;

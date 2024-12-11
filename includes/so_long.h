@@ -166,6 +166,7 @@ void	get_map_matrix(t_game_data *game_data);
 void	check_limits(t_game_data *game_data);
 void	validate_map(t_game_data *game_data);
 void	map_error(t_game_data *gd, char *msg);
+void	remove_carriage_return(char *str);
 
 // Mlx hooks
 void	move_hook(mlx_key_data_t keydata, void *data);
