@@ -6,7 +6,7 @@
 /*   By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 13:14:12 by adiban-i          #+#    #+#             */
-/*   Updated: 2024/12/08 18:22:29 by adiban-i         ###   ########.fr       */
+/*   Updated: 2024/12/27 20:10:42 by adiban-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	touch_enemy(t_game_data *gd)
 // Draw enemy on map
 void	update_enemy(t_game_data *gd, int i, int j)
 {
-	if (gd->enemy_index < gd->num_enemies)
+	if (gd->enemy_index < gd->num_enemies && gd->enemy_index >= 0)
 	{
 		gd->enemies[gd->enemy_index].position->x = j;
 		gd->enemies[gd->enemy_index].position->y = i;

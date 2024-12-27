@@ -6,68 +6,11 @@
 /*   By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:21:58 by adiban-i          #+#    #+#             */
-/*   Updated: 2024/12/27 19:42:39 by adiban-i         ###   ########.fr       */
+/*   Updated: 2024/12/27 20:10:06 by adiban-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	draw_img(t_game_data *gd, int i, int j, char *path)
-{
-	mlx_texture_t	*texture;
-	mlx_image_t		*img;
-
-	texture = mlx_load_png(path);
-	if (!texture)
-	{
-		ft_putstr("Error\nError loading texture-> ");
-		perror(path);
-		exit(EXIT_FAILURE);
-	}
-	img = mlx_texture_to_image(gd->mlx, texture);
-	mlx_delete_texture(texture);
-	if (!img)
-	{
-		ft_putstr("Error\nError loading image-> ");
-		perror(path);
-		exit(EXIT_FAILURE);
-	}
-	if (mlx_image_to_window(gd->mlx, img,
-			j * PIXELS, (i * PIXELS) + HEADER_HEIGHT) < 0)
-	{
-		ft_putstr("Error\nError instanciating img-> ");
-		perror(path);
-		exit(EXIT_FAILURE);
-	}
-}
-
-void	draw_init(t_game_data *gd, int i, int j, char *path)
-{
-	mlx_texture_t	*texture;
-	mlx_image_t		*img;
-
-	texture = mlx_load_png(path);
-	if (!texture)
-	{
-		ft_putstr("Error\nError loading texture-> ");
-		perror(path);
-		exit(EXIT_FAILURE);
-	}
-	img = mlx_texture_to_image(gd->mlx, texture);
-	mlx_delete_texture(texture);
-	if (!img)
-	{
-		ft_putstr("Error\nError loading image-> ");
-		perror(path);
-		exit(EXIT_FAILURE);
-	}
-	if (mlx_image_to_window(gd->mlx, img, j, i) < 0)
-	{
-		ft_putstr("Error\nError instanciating img-> ");
-		perror(path);
-		exit(EXIT_FAILURE);
-	}
-}
 
 static void	put_player(t_game_data *gd, int i, int j)
 {
