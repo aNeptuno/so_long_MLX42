@@ -6,7 +6,7 @@
 /*   By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:21:58 by adiban-i          #+#    #+#             */
-/*   Updated: 2024/12/27 19:35:02 by adiban-i         ###   ########.fr       */
+/*   Updated: 2024/12/27 19:42:39 by adiban-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static void	put_object_sprite(t_game_data *gd, char c, int i, int j)
 		put_player(gd, i, j);
 	else if (c == '1')
 		draw_img(gd, i, j, "./assets/wall.png");
-	else if (c == 'E' && gd->first_init)
+	else if (c == 'E')
 	{
 		handle_exit_sprite(gd, j, i);
 	}
@@ -143,9 +143,9 @@ void	put_map(t_game_data *gd)
 
 	draw_init(gd, 0, 0, "./assets/bg/black.png");
 	draw_header(gd);
-	//draw_img(gd, 0, 0, "./assets/bg/bg.png");
+	draw_img(gd, 0, 0, "./assets/bg/bg.png");
 	i = 0;
-	/* while (i < gd->rows)
+	while (i < gd->rows)
 	{
 		j = 0;
 		while (j < gd->cols)
@@ -154,6 +154,6 @@ void	put_map(t_game_data *gd)
 			j++;
 		}
 		i++;
-	} */
+	}
 	gd->first_init = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 14:21:29 by adiban-i          #+#    #+#             */
-/*   Updated: 2024/12/27 18:51:15 by adiban-i         ###   ########.fr       */
+/*   Updated: 2024/12/27 20:01:11 by adiban-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void	move_player(int coord_x, int coord_y, t_game_data *gd)
 	c = gd->map[gd->player->y - coord_y][gd->player->x + coord_x];
 	if (c != '1' && !gd->game_ended)
 	{
-		update_animations(gd->exit_anim_data);
 		//move_enemies(gd);
 		gd->map[gd->player->y][gd->player->x] = '0';
 		gd->player->y -= coord_y;

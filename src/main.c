@@ -6,7 +6,7 @@
 /*   By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 19:32:07 by adiban-i          #+#    #+#             */
-/*   Updated: 2024/12/27 19:27:48 by adiban-i         ###   ########.fr       */
+/*   Updated: 2024/12/27 19:52:16 by adiban-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	init_mlx(t_game_data *gd)
 {
-	gd->mlx = mlx_init(gd->size_x, gd->size_y + 32, "so_long", false);
+	gd->mlx = mlx_init(gd->size_x, gd->size_y, "so_long", false);
 	if (gd->mlx == NULL)
 	{
 		perror("Error\nmlx init failed\n");
@@ -35,6 +35,7 @@ static void	init_game(t_game_data *gd)
 	gd->exit_anim_data = malloc(sizeof(t_anim_data));
 	gd->update_counter = 0;
 	init_enemies(gd);
+	init_anim_data(gd);
 	put_map(gd);
 }
 

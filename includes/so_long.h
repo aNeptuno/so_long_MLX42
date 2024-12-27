@@ -6,7 +6,7 @@
 /*   By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 13:24:42 by adiban-i          #+#    #+#             */
-/*   Updated: 2024/12/27 18:48:29 by adiban-i         ###   ########.fr       */
+/*   Updated: 2024/12/27 20:04:23 by adiban-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,11 @@ typedef struct s_point
 /**
  * @current_frame: Frame index.
  * @frame_count: Number of frames in idle animation.
- * @frame_delay: Adjust the delay to control the animation speed.
- * @frame_counter: Counter to manage frame change timing.
- * @position_x: coord x of the sprite.
- * @position_y: coord y of the sprite.
  */
 typedef struct s_anim_data
 {
 	int	current_frame;
 	int	frame_count;
-	int	frame_delay;
-	int	frame_counter;
-	int	position_x;
-	int	position_y;
 }	t_anim_data;
 
 /// @brief Structure for enemy data
@@ -78,7 +70,6 @@ typedef struct s_enemy
  * @size_y: Height of the window in pixels (rows * 32).
  * @map_items: Number of items to collect in the map.
  * @first_init: Flag indicating if this is the first initialization.
- * @sprites: Pointer to the sprites structure for the game.
  * @player_moves: Counter for the number of moves made by the player.
  * @player: Pointer to the player position structure.
  * @new_move: New move direction: U (up), D(down), L(left), R(right).
@@ -147,8 +138,6 @@ void	close_window(void *gd);
 void	put_map(t_game_data *gd);
 void	update_enemy(t_game_data *gd, int i, int j);
 void	handle_exit_sprite(t_game_data *gd, int j, int i);
-void	put_animations(t_game_data *gd);
-void	render_next_frame_loop(void	*param);
 void	draw_end_img(t_game_data *gd);
 void	move_player(int coord_x, int coord_y, t_game_data *gd);
 void	draw_img(t_game_data *gd, int i, int j, char *path);

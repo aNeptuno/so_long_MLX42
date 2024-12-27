@@ -6,7 +6,7 @@
 /*   By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 01:53:27 by adiban-i          #+#    #+#             */
-/*   Updated: 2024/07/19 14:38:44 by adiban-i         ###   ########.fr       */
+/*   Updated: 2024/12/27 20:00:42 by adiban-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,33 +48,4 @@ void	move_hook(mlx_key_data_t keydata, void *data)
 		move_player(-1, 0, gd);
 	else if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
 		move_player(1, 0, gd);
-}
-
-void	update_animations(t_anim_data *anim_data)
-{
-	anim_data->frame_counter++;
-	if (anim_data->frame_counter >= anim_data->frame_delay)
-	{
-		anim_data->frame_counter = 0;
-		anim_data->current_frame = (anim_data->current_frame + 1)
-			% anim_data->frame_count;
-	}
-}
-
-void	render_next_frame_loop(void	*param)
-{
-	t_game_data	*gd;
-
-	gd = (t_game_data *)param;
-	gd->update_counter++;
-	if (gd->update_counter >= UPDATE_FREQ && !gd->game_ended)
-	{
-		gd->update_counter = 0.0;
-		update_animations(gd->exit_anim_data);
-		put_animations(gd);
-		//move_enemies(gd);
-	}
-	else if (gd->game_ended)
-		draw_end_img(gd);
-	return ;
 }
