@@ -6,7 +6,7 @@
 /*   By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:27:16 by adiban-i          #+#    #+#             */
-/*   Updated: 2024/12/27 20:07:23 by adiban-i         ###   ########.fr       */
+/*   Updated: 2024/12/27 20:20:08 by adiban-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	draw_end_img(t_game_data *gd)
 	mlx_image_t		*img;
 	char			*path;
 
+	draw_img(gd, 0, 0, "./assets/bg/black.png");
 	if (gd->win)
 		draw_img(gd, 0, 0, "./assets/bg/gamendwin.png");
 	else

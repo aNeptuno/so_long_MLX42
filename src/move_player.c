@@ -6,7 +6,7 @@
 /*   By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 14:21:29 by adiban-i          #+#    #+#             */
-/*   Updated: 2024/12/27 20:11:48 by adiban-i         ###   ########.fr       */
+/*   Updated: 2024/12/27 20:17:50 by adiban-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ static void	display_stats(t_game_data *gd, int is_moves)
 static void	move_exit(t_game_data *gd)
 {
 	gd->game_ended = 1;
-	printf("move exit\n");
 	if (gd->player_items == gd->map_items)
 	{
 		ft_putstr("\033[1;32m");
@@ -107,7 +106,10 @@ void	move_player(int coord_x, int coord_y, t_game_data *gd)
 			return ;
 		}
 		if (c == 'M')
+		{
 			touch_enemy(gd);
+			return ;
+		}
 		put_map(gd);
 	}
 }

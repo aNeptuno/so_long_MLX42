@@ -6,7 +6,7 @@
 /*   By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 13:14:12 by adiban-i          #+#    #+#             */
-/*   Updated: 2024/12/27 20:10:42 by adiban-i         ###   ########.fr       */
+/*   Updated: 2024/12/27 20:15:32 by adiban-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,12 @@ void	init_enemies(t_game_data *gd)
 // Player and enemy interaction
 void	touch_enemy(t_game_data *gd)
 {
-	gd->game_ended = 1;
 	ft_putstr("\033[1;31m");
 	ft_putstr("\nAntimatter lifeform reached you! You lost!\n");
 	ft_putstr("\033[0m\n");
+	gd->win = 0;
+	draw_end_img(gd);
+	gd->game_ended = 1;
 }
 
 // Draw enemy on map
