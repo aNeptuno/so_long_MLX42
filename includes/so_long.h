@@ -6,7 +6,7 @@
 /*   By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 13:24:42 by adiban-i          #+#    #+#             */
-/*   Updated: 2024/12/08 18:23:23 by adiban-i         ###   ########.fr       */
+/*   Updated: 2024/12/27 18:48:29 by adiban-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 # define LEFT 97
 # define PIXELS 32
 # define HEADER_HEIGHT 80
-# define UPDATE_FREQ 5
 
 typedef struct s_point
 {
@@ -56,31 +55,6 @@ typedef struct s_anim_data
 	int	position_x;
 	int	position_y;
 }	t_anim_data;
-
-/// @brief Structure for game sprites
-typedef struct s_sprites
-{
-	/* void	*bg; */
-	/* void	*lost;
-	void	*win; */
-	/* void	*player_up;
-	void	*player_left;
-	void	*player_right;
-	void	*player_down;
-	void	*obstacle;
-	void	*collectable; */
-	void	*exit;
-	/* void	*header;
-	void	*clean_img; */
-	void	*exit_anim_frames[6];
-	/* void	*enemy; */
-	/* void	*enemy_text;
-	void	*collectable_text;
-	void	*player_up_text;
-	void	*player_left_text;
-	void	*player_right_text;
-	void	*player_down_text; */
-}		t_sprites;
 
 /// @brief Structure for enemy data
 typedef struct s_enemy
@@ -126,7 +100,6 @@ typedef struct s_game_data
 	int			size_y;
 	int			map_items;
 	int			first_init;
-	t_sprites	*sprites;
 	int			player_moves;
 	t_point		*player;
 	char		new_move;
@@ -153,11 +126,9 @@ char	*ft_strjoin(char const *s1, char const *s2);
 
 // Game initialization and data cleaning
 void	get_map(t_game_data *game_data, char *file_content);
-void	init_sprites(t_game_data *game_data);
 void	init_enemies(t_game_data *gd);
 void	error_and_free(t_game_data *game_data, char *msg);
 void	free_game_data(t_game_data *game_data);
-void	load_animations(t_game_data *gd);
 
 // Map validation
 void	get_cols(t_game_data *game_data);
@@ -181,6 +152,7 @@ void	render_next_frame_loop(void	*param);
 void	draw_end_img(t_game_data *gd);
 void	move_player(int coord_x, int coord_y, t_game_data *gd);
 void	draw_img(t_game_data *gd, int i, int j, char *path);
+void	draw_init(t_game_data *gd, int i, int j, char *path);
 
 // Enemies
 void	move_enemies(t_game_data *gd);

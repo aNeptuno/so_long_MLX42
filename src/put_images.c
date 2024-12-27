@@ -6,21 +6,11 @@
 /*   By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:21:58 by adiban-i          #+#    #+#             */
-/*   Updated: 2024/12/08 18:23:54 by adiban-i         ###   ########.fr       */
+/*   Updated: 2024/12/27 19:35:02 by adiban-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-/* void	reset_imgs(t_game_data *gd)
-{
-	mlx_delete_image(gd->mlx, gd->sprites->player_up);
-	mlx_delete_image(gd->mlx, gd->sprites->player_left);
-	mlx_delete_image(gd->mlx, gd->sprites->player_right);
-	mlx_delete_image(gd->mlx, gd->sprites->player_down);
-	mlx_delete_image(gd->mlx, gd->sprites->collectable);
-	mlx_delete_image(gd->mlx, gd->sprites->enemy);
-} */
 
 void	draw_img(t_game_data *gd, int i, int j, char *path)
 {
@@ -51,7 +41,7 @@ void	draw_img(t_game_data *gd, int i, int j, char *path)
 	}
 }
 
-static void	draw_init(t_game_data *gd, int i, int j, char *path)
+void	draw_init(t_game_data *gd, int i, int j, char *path)
 {
 	mlx_texture_t	*texture;
 	mlx_image_t		*img;
@@ -99,7 +89,7 @@ static void	put_object_sprite(t_game_data *gd, char c, int i, int j)
 {
 	if (c == 'P')
 		put_player(gd, i, j);
-	else if (c == '1' && gd->first_init)
+	else if (c == '1')
 		draw_img(gd, i, j, "./assets/wall.png");
 	else if (c == 'E' && gd->first_init)
 	{
@@ -131,12 +121,12 @@ static void	draw_header(t_game_data *gd)
 	char	*moves;
 	char	*items;
 
-	title_x = (gd->size_x / 2) - 25;
+	title_x = (gd->size_x / 2);
 	collected_x = gd->size_x / 20;
 	moves = ft_itoa(gd->player_moves);
 	items = ft_itoa(gd->player_items);
-	draw_init(gd, title_x, 0, "./assets/title.png");
-	ft_mlx_string(gd, gd->size_x / 3 - 20, 45,
+	draw_init(gd, 0, title_x, "./assets/title.png");
+	ft_mlx_string(gd, gd->size_x / 3 - 100, 45,
 		"Cybercat Chronicles: The Ancient Floppy Hunt");
 	ft_mlx_string(gd, gd->size_x - 200, 30, "Player Moves: ");
 	ft_mlx_string(gd, gd->size_x - 50, 30, moves);
@@ -146,21 +136,16 @@ static void	draw_header(t_game_data *gd)
 	free(items);
 }
 
-
-
 void	put_map(t_game_data *gd)
 {
 	int	i;
 	int	j;
 
-	if (gd->first_init)
-	{
-		draw_init(gd, 0, 0, "./assets/bg/black.png");
-		draw_header(gd);
-		draw_init(gd, 0, HEADER_HEIGHT, "./assets/bg/bg.png");
-	}
+	draw_init(gd, 0, 0, "./assets/bg/black.png");
+	draw_header(gd);
+	//draw_img(gd, 0, 0, "./assets/bg/bg.png");
 	i = 0;
-	while (i < gd->rows)
+	/* while (i < gd->rows)
 	{
 		j = 0;
 		while (j < gd->cols)
@@ -169,6 +154,6 @@ void	put_map(t_game_data *gd)
 			j++;
 		}
 		i++;
-	}
+	} */
 	gd->first_init = 0;
 }

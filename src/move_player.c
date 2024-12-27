@@ -6,7 +6,7 @@
 /*   By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 14:21:29 by adiban-i          #+#    #+#             */
-/*   Updated: 2024/12/08 18:25:47 by adiban-i         ###   ########.fr       */
+/*   Updated: 2024/12/27 18:51:15 by adiban-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ static void	display_stats(t_game_data *gd, int is_moves)
 static void	move_exit(t_game_data *gd)
 {
 	gd->game_ended = 1;
+	printf("move exit\n");
 	if (gd->player_items == gd->map_items)
 	{
 		ft_putstr("\033[1;32m");
@@ -88,12 +89,10 @@ void	move_player(int coord_x, int coord_y, t_game_data *gd)
 	char	c;
 
 	c = gd->map[gd->player->y - coord_y][gd->player->x + coord_x];
-	if (c != '1')
+	if (c != '1' && !gd->game_ended)
 	{
-		/* update_animations(gd->exit_anim_data);
-		put_animations(gd); */
-		/////
-		move_enemies(gd);
+		update_animations(gd->exit_anim_data);
+		//move_enemies(gd);
 		gd->map[gd->player->y][gd->player->x] = '0';
 		gd->player->y -= coord_y;
 		gd->player->x += coord_x;
@@ -104,7 +103,10 @@ void	move_player(int coord_x, int coord_y, t_game_data *gd)
 		if (c == 'C')
 			gd->player_items++;
 		if (c == 'E')
+		{
 			move_exit(gd);
+			return ;
+		}
 		if (c == 'M')
 			touch_enemy(gd);
 		put_map(gd);

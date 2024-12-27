@@ -6,7 +6,7 @@
 #    By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/13 11:52:59 by adiban-i          #+#    #+#              #
-#    Updated: 2024/12/08 18:54:06 by adiban-i         ###   ########.fr        #
+#    Updated: 2024/12/27 18:06:33 by adiban-i         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,6 @@ SRC_FILES = $(LIBFT_DIR)/ft_split.c \
 			$(SRC_DIR)/enemy.c \
 			$(SRC_DIR)/enemy_utils.c \
 			$(SRC_DIR)/draw_images.c \
-			$(SRC_DIR)/init_sprites.c
 			
 OBJ_FILES = $(SRC_FILES:.c=.o)
 

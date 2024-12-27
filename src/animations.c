@@ -6,7 +6,7 @@
 /*   By: adiban-i <adiban-i@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 17:11:15 by adiban-i          #+#    #+#             */
-/*   Updated: 2024/07/19 13:25:10 by adiban-i         ###   ########.fr       */
+/*   Updated: 2024/12/27 18:04:39 by adiban-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,43 +37,27 @@ static void	show_error(int is_null, char *msg)
 	}
 }
 
-void	load_animations(t_game_data *gd)
+static char	*get_animation_asset(int frame_index)
 {
-	char	i[1];
-	char	*path;
-	char	*tmp;
-	void	*texture;
+	char	*asset;
 
-	init_anim_data(gd);
-	i[0] = '0';
-	while (i[0] <= '5')
-	{
-		tmp = ft_strjoin("./assets/exit_anim/", i);
-		path = ft_strjoin(tmp, ".png");
-		texture = mlx_load_png(path);
-		show_error(!texture, "Error loading exit anim texture: ");
-		gd->sprites->exit_anim_frames[i[0] - 48] = mlx_texture_to_image(
-				gd->mlx, texture);
-		show_error(!gd->sprites->exit_anim_frames[i[0] - 48],
-			"Error loading exit anim frames: ");
-		i[0]++;
-		free(path);
-		free(tmp);
-	}
-	mlx_delete_texture(texture);
+	asset = ft_strjoin("./assets/exit_anim/", frame_index);
+	return (asset);
 }
 
 void	put_animations(t_game_data *gd)
 {
-	int	frame_index;
-	int	x;
-	int	y;
+	int		frame_index;
+	int		x;
+	int		y;
+	char	*asset;
 
 	frame_index = gd->exit_anim_data->current_frame;
 	x = gd->exit_anim_data->position_x;
 	y = gd->exit_anim_data->position_y;
-	mlx_image_to_window(gd->mlx,
-		gd->sprites->exit_anim_frames[frame_index], x, y);
+	asset = get_animation_asset(frame_index);
+	draw_img(gd, x, y, asset);
+	free(asset);
 }
 
 void	handle_exit_sprite(t_game_data *gd, int j, int i)
